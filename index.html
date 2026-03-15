@@ -20,7 +20,7 @@
 html,body{background:var(--bg-base);color:var(--text-primary);font-family:'Barlow',sans-serif;height:100%;overflow:hidden}
 
 body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;background-image:linear-gradient(#222 1px,transparent 1px),linear-gradient(90deg,#222 1px,transparent 1px);background-size:40px 40px;opacity:0.015}
-#app{display:flex;flex-direction:column;height:100dvh;max-width:480px;margin:0 auto;position:relative}
+#app{display:flex;flex-direction:column;height:100dvh;max-width:640px;margin:0 auto;position:relative}
 #topbar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border-subtle);background:var(--bg-base);z-index:100}
 #topbar .logo{font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:22px;letter-spacing:3px;text-transform:uppercase;color:var(--text-white);cursor:pointer;user-select:none}
 #topbar .logo span{color:var(--accent)}
@@ -31,8 +31,8 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 #content::-webkit-scrollbar{width:3px}
 #content::-webkit-scrollbar-thumb{background:var(--border-mid)}
 #bottomnav{flex-shrink:0;display:flex;border-top:1px solid var(--border-subtle);background:var(--bg-surface);z-index:100}
-.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0;cursor:pointer;background:none;border:none;color:var(--text-muted);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;gap:4px;transition:color 0.2s}
-.nav-btn .nav-icon{font-size:20px}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 0;cursor:pointer;background:none;border:none;color:var(--text-muted);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;gap:5px;transition:color 0.2s;min-height:60px}
+.nav-btn .nav-icon{font-size:22px}
 .nav-btn.active{color:var(--accent)}
 .nav-btn.upload-btn{color:var(--text-white)}
 .nav-btn.upload-btn .nav-icon{background:var(--accent);width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:22px;clip-path:polygon(4px 0%,calc(100% - 4px) 0%,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0% calc(100% - 4px),0% 4px);transition:background 0.2s}
@@ -82,7 +82,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 .pulse-dot:nth-child(3){animation-delay:0.4s}
 @keyframes pulse{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
 /* AI SCAN */
-.scan-overlay{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;max-width:480px;margin:0 auto}
+.scan-overlay{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;max-width:640px;margin:0 auto}
 .scan-overlay.hidden{display:none}
 .scan-icon{font-size:52px;animation:scanPulse 1s ease-in-out infinite}
 @keyframes scanPulse{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.1);opacity:1}}
@@ -124,7 +124,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 .explore-search input::placeholder{color:var(--text-muted)}
 .explore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px}
 /* MODALS */
-.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.85);display:flex;flex-direction:column;animation:fadeIn 0.2s ease;max-width:480px;margin:0 auto}
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.85);display:flex;flex-direction:column;animation:fadeIn 0.2s ease;max-width:640px;margin:0 auto}
 .modal-overlay.hidden{display:none}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border-subtle);background:var(--bg-base);flex-shrink:0}
@@ -168,7 +168,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 .comment-input-bar input:focus{border-color:var(--accent)}
 .comment-send-btn{background:var(--accent);border:none;cursor:pointer;color:white;font-family:Impact,sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:0 16px}
 /* STORY VIEWER */
-#story-viewer{position:fixed;inset:0;z-index:2000;background:#000;display:flex;flex-direction:column;max-width:480px;margin:0 auto}
+#story-viewer{position:fixed;inset:0;z-index:2000;background:#000;display:flex;flex-direction:column;max-width:640px;margin:0 auto}
 #story-viewer.hidden{display:none}
 .story-progress-bar{display:flex;gap:3px;padding:10px 12px 6px;position:absolute;top:0;left:0;right:0;z-index:10}
 .story-prog-seg{flex:1;height:2px;background:rgba(255,255,255,0.3);position:relative;overflow:hidden}
@@ -187,7 +187,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 .story-preview img{width:100%;height:100%;object-fit:cover}
 .story-upload-hint{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--text-secondary);text-transform:uppercase;text-align:center}
 /* SHEET */
-.bottom-sheet{position:fixed;bottom:0;left:0;right:0;z-index:1500;background:var(--bg-surface);border-top:1px solid var(--border-mid);padding:8px 0 24px;animation:slideUp 0.2s ease;max-width:480px;margin:0 auto}
+.bottom-sheet{position:fixed;bottom:0;left:0;right:0;z-index:1500;background:var(--bg-surface);border-top:1px solid var(--border-mid);padding:8px 0 24px;animation:slideUp 0.2s ease;max-width:640px;margin:0 auto}
 .bottom-sheet.hidden{display:none}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .sheet-item{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:1px;color:var(--text-primary);transition:background 0.15s}
@@ -217,7 +217,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 .auth-error{background:var(--danger-glow);border:1px solid var(--danger);color:var(--danger);font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1px;padding:8px 12px;margin-bottom:8px}
 .auth-error.hidden{display:none}
 /* ADMIN */
-#admin-panel{position:fixed;inset:0;z-index:5000;background:var(--bg-base);display:flex;flex-direction:column;max-width:480px;margin:0 auto;animation:fadeIn 0.2s ease}
+#admin-panel{position:fixed;inset:0;z-index:5000;background:var(--bg-base);display:flex;flex-direction:column;max-width:640px;margin:0 auto;animation:fadeIn 0.2s ease}
 #admin-panel.hidden{display:none}
 .admin-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--admin);background:var(--bg-base);flex-shrink:0}
 .admin-title{font-family:Impact,sans-serif;font-size:20px;letter-spacing:3px;text-transform:uppercase;color:var(--admin)}
@@ -347,6 +347,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
     <button class="nav-btn upload-btn" onclick="openUploadModal()"><span class="nav-icon">+</span><span>POST</span></button>
     <button class="nav-btn" onclick="openStoryAdd()"><span class="nav-icon">&#x25C8;</span><span>STORY</span></button>
     <button class="nav-btn" onclick="switchView('profile',this)"><span class="nav-icon">&#x25C9;</span><span>PROFIL</span></button>
+    <button class="nav-btn" onclick="openAdminPanel()" style="color:var(--admin)"><span class="nav-icon">&#x1F441;</span><span>ADMIN</span></button>
   </nav>
 </div>
 
@@ -405,6 +406,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 <div class="sheet-overlay hidden" id="sheet-overlay" onclick="closeSheet()"></div>
 <div class="bottom-sheet hidden" id="post-sheet">
   <div class="sheet-item danger" onclick="deleteCurrentPost()">&#x1F5D1; POST LOESCHEN</div>
+  <div class="sheet-item" id="sheet-admin-delete" style="display:none;color:var(--admin)" onclick="adminDeleteCurrentPost()">&#x1F441; ADMIN: POST ENTFERNEN</div>
   <div class="sheet-item" onclick="closeSheet()">&#x2715; ABBRECHEN</div>
 </div>
 
@@ -451,7 +453,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 const SUPABASE_URL='https://sigjwzivusuzmhvixtbm.supabase.co';
 const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpZ2p3eml2dXN1em1odml4dGJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTI3MDksImV4cCI6MjA4ODcyODcwOX0.j0yB-NYM5HOkfKVBz24rWMBQNF8w-uEFjX55UGeD30E';
 // ⚠ ANTHROPIC KEY EINTRAGEN (platform.anthropic.com):
-const ANTHROPIC_KEY='DEIN_API_KEY_HIER';
+const ANTHROPIC_KEY='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';
 const ADMIN_PASSWORD='LoeweTiger123?!';
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
@@ -581,19 +583,26 @@ async function checkImageWithClaude(base64data){
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':ANTHROPIC_KEY,'anthropic-version':'2023-06-01'},
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':ANTHROPIC_KEY,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
       body:JSON.stringify({
-        model:'claude-opus-4-20250514',max_tokens:200,
+        model:'claude-haiku-4-5-20251001',max_tokens:150,
         messages:[{role:'user',content:[
           {type:'image',source:{type:'base64',media_type:'image/jpeg',data:base64}},
-          {type:'text',text:'Analysiere dieses Bild auf unangemessene Inhalte fuer eine Schul-App (Schueler 10-18 Jahre). Antworte NUR mit JSON ohne Markdown: {"safe":true/false,"reason":"deutsche Begruendung wenn unsafe"}. Unsafe wenn: Nacktheit/sexuelle Inhalte, Gewalt/Blut/Waffen in gewaltsamem Kontext, Extremismus, Hassymbole, Drogen. Normale Fotos (Selfies, Essen, Sport, Natur, Schule) immer safe:true.'}
+          {type:'text',text:'Du bist ein strikter Content-Filter fuer eine Schul-App (Schueler 10-18 Jahre). Antworte NUR mit JSON, kein Markdown, keine Erklaerung: {"safe":true} oder {"safe":false,"reason":"kurze deutsche Begruendung"}. Markiere als safe:false wenn das Bild zeigt: Nacktheit oder Haut die Intimbereiche zeigt, sexuelle Inhalte oder Posen, Gewalt, Blut, Waffen in gewaltsamem Kontext, Extremismus oder Hassymbole, Drogen oder Alkohol prominent. Bei normalen Fotos (Gesichter, Sport, Essen, Natur, Schule, Tiere) antworte {"safe":true}.'}
         ]}]
       })
     });
     const data=await res.json();
+    if(data.error){console.error('Claude API Error:',data.error);return{safe:false,reason:'API Fehler: '+data.error.message}}
     const text=(data.content&&data.content[0]&&data.content[0].text)||'{"safe":true}';
-    return JSON.parse(text.replace(/```json|```/g,'').trim());
-  }catch(e){return{safe:true,skip:true}}
+    const clean=text.replace(/```json|```/g,'').trim();
+    return JSON.parse(clean);
+  }catch(e){console.error('Vision check failed:',e);return{safe:false,reason:'Verbindungsfehler — wird manuell geprueft'}}
 }
 
 // FILTERS
@@ -686,12 +695,13 @@ function renderFeed(){
 function renderPost(p){
   const liked=userLikes.has(p.id);
   const isOwn=p.user_id===currentUser.id;
+  const showMenu=isOwn||adminLoggedIn;
   const fcss=(FILTERS.find(f=>f.name===p.filter_name)||{css:''}).css;
   const init=(p.real_name||p.username||'?').slice(0,2).toUpperCase();
   return'<div class="post-card" data-id="'+p.id+'">'
     +'<div class="post-header"><div class="post-avatar">'+init+'</div>'
     +'<div class="post-user"><div class="post-username">'+p.username+'</div><div class="post-grade">Klasse '+p.grade+'</div></div>'
-    +(isOwn?'<button class="post-more" onclick="openPostSheet(\''+p.id+'\')">&#x22EF;</button>':'')+'</div>'
+    +(showMenu?'<button class="post-more" style="'+(adminLoggedIn&&!isOwn?'color:var(--admin)':'')+'" onclick="openPostSheet(\''+p.id+'\')">&#x22EF;</button>':'')+'</div>'
     +'<div class="post-image-wrap"><img src="'+p.image_data+'" style="filter:'+fcss+'" loading="lazy" /></div>'
     +'<div class="post-actions">'
     +'<button class="action-btn '+(liked?'liked':'')+'" id="like-btn-'+p.id+'" onclick="toggleLike(\''+p.id+'\')">'+( liked?'&#x2665;':'&#x2661;')+'</button>'
@@ -835,7 +845,17 @@ function handleExploreSearch(val){if(!val.trim()){renderExploreGrid(allExplorePo
 
 // POST SHEET
 let sheetPostId=null;
-function openPostSheet(id){sheetPostId=id;document.getElementById('sheet-overlay').classList.remove('hidden');document.getElementById('post-sheet').classList.remove('hidden')}
+function openPostSheet(id){
+  sheetPostId=id;
+  // show admin delete option if admin is logged in
+  const adminBtn=document.getElementById('sheet-admin-delete');
+  const ownerBtn=document.querySelector('#post-sheet .danger');
+  const isOwn=feedPosts.find(function(p){return p.id===id&&p.user_id===currentUser.id});
+  if(ownerBtn)ownerBtn.style.display=isOwn?'flex':'none';
+  if(adminBtn)adminBtn.style.display=adminLoggedIn?'flex':'none';
+  document.getElementById('sheet-overlay').classList.remove('hidden');
+  document.getElementById('post-sheet').classList.remove('hidden');
+}
 function closeSheet(){document.getElementById('sheet-overlay').classList.add('hidden');document.getElementById('post-sheet').classList.add('hidden');sheetPostId=null}
 async function deleteCurrentPost(){
   if(!sheetPostId)return;closeSheet();
@@ -847,9 +867,19 @@ async function deleteCurrentPost(){
     showToast('POST GELOESCHT','success');loadFeed(true);
   }catch(e){showToast('FEHLER','error')}
 }
+async function adminDeleteCurrentPost(){
+  if(!sheetPostId||!adminLoggedIn)return;closeSheet();
+  try{
+    await db.from('dsn_photo_comments').delete().eq('photo_id',sheetPostId);
+    await db.from('dsn_photo_likes').delete().eq('photo_id',sheetPostId);
+    await db.from('dsn_photos').delete().eq('id',sheetPostId);
+    logActivity('flag',currentUser.username,'ADMIN hat Post geloescht',sheetPostId);
+    showToast('POST ENTFERNT (ADMIN)','success');loadFeed(true);
+  }catch(e){showToast('FEHLER','error')}
+}
 
 // ADMIN PANEL
-let logotapCount=0,logotapTimer=null,currentAdminTab='queue';
+let logotapCount=0,logotapTimer=null,currentAdminTab='queue',adminLoggedIn=false;
 function setupLogoTap(){
   document.getElementById('logo-tap').addEventListener('click',function(){
     logotapCount++;clearTimeout(logotapTimer);
@@ -869,10 +899,12 @@ function closeAdminPanel(){document.getElementById('admin-panel').classList.add(
 async function checkAdminPw(){
   const pw=document.getElementById('admin-pw-input').value;
   if(pw===ADMIN_PASSWORD){
+    adminLoggedIn=true;
     document.getElementById('admin-pw-screen').style.display='none';
     document.getElementById('admin-main').style.display='flex';
     logActivity('login',currentUser.username,'ADMIN PANEL GEOEFFNET');
     adminTab('queue',document.querySelector('.admin-tab'));
+    renderFeed(); // re-render feed to show admin delete buttons
   }else{
     document.getElementById('admin-pw-error').classList.remove('hidden');
     document.getElementById('admin-pw-input').value='';
