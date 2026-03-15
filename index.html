@@ -699,37 +699,73 @@ body::after {
 .story-tap-right { right: 0; }
 
 /* ═══════════════════════════════════════════════════════
-   LOGIN WALL
+   LOGIN SCREEN
 ═══════════════════════════════════════════════════════ */
 #login-wall {
   position: fixed; inset: 0; z-index: 9000;
   background: var(--bg-base);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 16px; padding: 32px;
-  text-align: center;
+  padding: 32px 24px;
+  overflow-y: auto;
 }
 #login-wall.hidden { display: none; }
+
 .login-logo {
   font-family: Impact, sans-serif;
-  font-size: 36px; letter-spacing: 5px;
+  font-size: 36px; letter-spacing: 6px;
   text-transform: uppercase; color: var(--text-white);
-  margin-bottom: 8px;
 }
 .login-logo span { color: var(--accent); }
-.login-sub {
-  font-size: 13px; color: var(--text-secondary);
-  max-width: 260px; line-height: 1.5;
+
+.auth-field {
+  margin-bottom: 14px;
 }
-.login-wall-btn {
+.auth-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 2px;
+  color: var(--text-secondary); text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.auth-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-mid);
+  border-left: 2px solid var(--accent);
+  color: var(--text-white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.auth-input:focus { border-color: var(--accent); background: var(--bg-surface); }
+.auth-input::placeholder { color: var(--text-muted); }
+
+.auth-btn {
+  width: 100%; margin-top: 8px;
   background: var(--accent);
   color: white; border: none; cursor: pointer;
-  padding: 14px 32px;
-  font-family: Impact, sans-serif;
-  font-size: 15px; letter-spacing: 3px;
-  text-transform: uppercase; margin-top: 8px;
+  padding: 14px;
+  font-family: Impact, Haettenschweiler, sans-serif;
+  font-size: 16px; letter-spacing: 3px;
+  text-transform: uppercase;
   clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px);
+  transition: background 0.2s, opacity 0.2s;
 }
+.auth-btn:hover { background: #4a7aee; }
+.auth-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.auth-error {
+  background: var(--danger-glow);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; letter-spacing: 1px;
+  padding: 8px 12px; margin-bottom: 8px;
+}
+.auth-error.hidden { display: none; }
 
 /* ═══════════════════════════════════════════════════════
    TOAST
@@ -825,12 +861,76 @@ body::after {
 </head>
 <body>
 
-<!-- LOGIN WALL -->
+<!-- LOGIN SCREEN -->
 <div id="login-wall">
-  <div class="login-logo">DSN <span>PHOTOS</span></div>
-  <div class="login-sub">Bitte zuerst beim Dark School Net einloggen, um Photos nutzen zu können.</div>
-  <button class="login-wall-btn" onclick="window.location.href='index.html'">ZUM LOGIN</button>
-  <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">oder: Diese App nur aus der DSN-Hauptapp öffnen</div>
+
+  <!-- Scanlines on login too -->
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.4) 2px,rgba(0,0,0,0.4) 4px);opacity:0.4;pointer-events:none;z-index:1"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(#222 1px,transparent 1px),linear-gradient(90deg,#222 1px,transparent 1px);background-size:40px 40px;opacity:0.015;pointer-events:none;z-index:1"></div>
+
+  <div style="position:relative;z-index:2;width:100%;max-width:340px;display:flex;flex-direction:column;gap:0">
+
+    <!-- Logo -->
+    <div style="text-align:center;margin-bottom:32px">
+      <div class="login-logo">DSN <span>PHOTOS</span></div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;color:var(--text-muted);margin-top:6px">DARK SCHOOL NET</div>
+    </div>
+
+    <!-- Tab Switch -->
+    <div style="display:flex;border:1px solid var(--border-mid);margin-bottom:20px">
+      <button id="tab-login" onclick="switchAuthTab('login')"
+        style="flex:1;padding:12px;font-family:Impact,sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;background:var(--accent);color:white;transition:all 0.2s">
+        LOGIN
+      </button>
+      <button id="tab-register" onclick="switchAuthTab('register')"
+        style="flex:1;padding:12px;font-family:Impact,sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;background:var(--bg-card);color:var(--text-secondary);transition:all 0.2s">
+        REGISTRIEREN
+      </button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="auth-login-form">
+      <div class="auth-field">
+        <div class="auth-label">USERNAME</div>
+        <input class="auth-input" id="login-username" type="text" placeholder="dein_username"
+          autocomplete="username" autocapitalize="none" spellcheck="false"
+          onkeypress="if(event.key==='Enter')document.getElementById('login-password').focus()" />
+      </div>
+      <div class="auth-field">
+        <div class="auth-label">PASSWORT</div>
+        <input class="auth-input" id="login-password" type="password" placeholder="••••••••"
+          autocomplete="current-password"
+          onkeypress="if(event.key==='Enter')doLogin()" />
+      </div>
+      <div class="auth-error hidden" id="login-error"></div>
+      <button class="auth-btn" id="login-btn" onclick="doLogin()">EINLOGGEN</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="auth-register-form" style="display:none">
+      <div class="auth-field">
+        <div class="auth-label">USERNAME</div>
+        <input class="auth-input" id="reg-username" type="text" placeholder="z.B. shadow_felix"
+          autocapitalize="none" spellcheck="false" maxlength="20" />
+        <div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.5px">Nur Kleinbuchstaben, Zahlen und _</div>
+      </div>
+      <div class="auth-field">
+        <div class="auth-label">ECHTER NAME</div>
+        <input class="auth-input" id="reg-realname" type="text" placeholder="z.B. Felix" maxlength="30" />
+      </div>
+      <div class="auth-field">
+        <div class="auth-label">KLASSE</div>
+        <input class="auth-input" id="reg-grade" type="text" placeholder="z.B. 10a" maxlength="10" />
+      </div>
+      <div class="auth-field">
+        <div class="auth-label">PASSWORT</div>
+        <input class="auth-input" id="reg-password" type="password" placeholder="Min. 6 Zeichen" maxlength="50" />
+      </div>
+      <div class="auth-error hidden" id="register-error"></div>
+      <button class="auth-btn" id="register-btn" onclick="doRegister()">ACCOUNT ERSTELLEN</button>
+    </div>
+
+  </div>
 </div>
 
 <!-- MAIN APP -->
@@ -1024,16 +1124,148 @@ const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFz
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ═══════════════════════════════════════════════════════
-//  AUTH
+//  AUTH — CRYPTO (Web Crypto API, kein externes Package)
 // ═══════════════════════════════════════════════════════
-let currentUser = null;
+function generateSalt() {
+  const b = new Uint8Array(32); crypto.getRandomValues(b);
+  return Array.from(b).map(x => x.toString(16).padStart(2,'0')).join('');
+}
+async function hashPassword(password, saltHex) {
+  const enc  = new TextEncoder();
+  const salt = new Uint8Array(saltHex.match(/.{2}/g).map(h => parseInt(h,16)));
+  const key  = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits(
+    { name:'PBKDF2', hash:'SHA-256', salt, iterations:200000 }, key, 256
+  );
+  return Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+async function verifyPassword(password, saltHex, storedHash) {
+  return (await hashPassword(password, saltHex)) === storedHash;
+}
 
+// ═══════════════════════════════════════════════════════
+//  AUTH — SESSION
+// ═══════════════════════════════════════════════════════
+function saveSession(user) { sessionStorage.setItem('dsn_session', JSON.stringify(user)); }
 function getSession() {
   try { return JSON.parse(sessionStorage.getItem('dsn_session')); } catch { return null; }
 }
-function logout() {
-  sessionStorage.removeItem('dsn_session');
-  location.reload();
+function logout() { sessionStorage.removeItem('dsn_session'); location.reload(); }
+
+// ═══════════════════════════════════════════════════════
+//  AUTH — UI
+// ═══════════════════════════════════════════════════════
+function switchAuthTab(tab) {
+  const isLogin = tab === 'login';
+  document.getElementById('auth-login-form').style.display    = isLogin ? 'block' : 'none';
+  document.getElementById('auth-register-form').style.display = isLogin ? 'none'  : 'block';
+  document.getElementById('tab-login').style.background    = isLogin ? 'var(--accent)' : 'var(--bg-card)';
+  document.getElementById('tab-login').style.color         = isLogin ? 'white' : 'var(--text-secondary)';
+  document.getElementById('tab-register').style.background = isLogin ? 'var(--bg-card)' : 'var(--accent)';
+  document.getElementById('tab-register').style.color      = isLogin ? 'var(--text-secondary)' : 'white';
+}
+
+function showAuthError(formId, msg) {
+  const el = document.getElementById(formId);
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+function clearAuthError(formId) {
+  document.getElementById(formId).classList.add('hidden');
+}
+
+// ═══════════════════════════════════════════════════════
+//  LOGIN
+// ═══════════════════════════════════════════════════════
+async function doLogin() {
+  clearAuthError('login-error');
+  const username = document.getElementById('login-username').value.trim().toLowerCase();
+  const password = document.getElementById('login-password').value;
+
+  if(!username || !password) { showAuthError('login-error','USERNAME UND PASSWORT EINGEBEN'); return; }
+
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true; btn.textContent = 'WIRD GEPRÜFT...';
+
+  try {
+    const { data, error } = await db
+      .from('dsn_users')
+      .select('*')
+      .eq('username', username)
+      .single();
+
+    if(error || !data) {
+      showAuthError('login-error', 'USER NICHT GEFUNDEN');
+      btn.disabled = false; btn.textContent = 'EINLOGGEN'; return;
+    }
+
+    const valid = await verifyPassword(password, data.salt, data.password_hash);
+    if(!valid) {
+      showAuthError('login-error', 'FALSCHES PASSWORT');
+      btn.disabled = false; btn.textContent = 'EINLOGGEN'; return;
+    }
+
+    saveSession(data);
+    currentUser = data;
+    document.getElementById('login-wall').classList.add('hidden');
+    loadFeed();
+
+  } catch(e) {
+    showAuthError('login-error', 'FEHLER: '+e.message);
+    btn.disabled = false; btn.textContent = 'EINLOGGEN';
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  REGISTER
+// ═══════════════════════════════════════════════════════
+async function doRegister() {
+  clearAuthError('register-error');
+  const username  = document.getElementById('reg-username').value.trim().toLowerCase();
+  const real_name = document.getElementById('reg-realname').value.trim();
+  const grade     = document.getElementById('reg-grade').value.trim();
+  const password  = document.getElementById('reg-password').value;
+
+  if(!username || !real_name || !grade || !password) {
+    showAuthError('register-error', 'ALLE FELDER AUSFÜLLEN'); return;
+  }
+  if(!/^[a-z0-9_]+$/.test(username)) {
+    showAuthError('register-error', 'USERNAME: NUR a-z, 0-9, _'); return;
+  }
+  if(password.length < 6) {
+    showAuthError('register-error', 'PASSWORT MIND. 6 ZEICHEN'); return;
+  }
+
+  const btn = document.getElementById('register-btn');
+  btn.disabled = true; btn.textContent = 'WIRD ERSTELLT...';
+
+  try {
+    // Check if username taken
+    const { data: existing } = await db.from('dsn_users').select('id').eq('username', username).single();
+    if(existing) {
+      showAuthError('register-error', 'USERNAME BEREITS VERGEBEN');
+      btn.disabled = false; btn.textContent = 'ACCOUNT ERSTELLEN'; return;
+    }
+
+    const salt          = generateSalt();
+    const password_hash = await hashPassword(password, salt);
+
+    const { data, error } = await db.from('dsn_users').insert({
+      username, real_name, grade, salt, password_hash
+    }).select().single();
+
+    if(error) throw error;
+
+    saveSession(data);
+    currentUser = data;
+    document.getElementById('login-wall').classList.add('hidden');
+    showToast('WILLKOMMEN, '+username.toUpperCase()+' ✓', 'success');
+    loadFeed();
+
+  } catch(e) {
+    showAuthError('register-error', 'FEHLER: '+e.message);
+    btn.disabled = false; btn.textContent = 'ACCOUNT ERSTELLEN';
+  }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1614,6 +1846,8 @@ async function deleteCurrentPost() {
 // ═══════════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════════
+let currentUser = null;
+
 (function init() {
   currentUser = getSession();
   if(!currentUser) {
