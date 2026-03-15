@@ -275,6 +275,61 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 .warn-input-area textarea:focus{border-color:var(--warning)}
 .section-head{font-family:Impact,sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--text-secondary);padding:12px 16px 6px;border-bottom:1px solid var(--border-subtle)}
 .admin-pw-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px;padding:32px}
+
+/* ── PHOTO VIEWER ── */
+#photo-viewer{position:fixed;inset:0;z-index:3000;background:#000;display:flex;flex-direction:column;max-width:640px;margin:0 auto;animation:fadeIn 0.2s ease}
+#photo-viewer.hidden{display:none}
+.pv-header{display:flex;align-items:center;gap:10px;padding:12px 16px;position:absolute;top:0;left:0;right:0;z-index:10;background:linear-gradient(to bottom,rgba(0,0,0,0.7),transparent)}
+.pv-avatar{width:34px;height:34px;background:var(--bg-card);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-family:Impact,sans-serif;font-size:13px;color:white;flex-shrink:0}
+.pv-username{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:white;flex:1;text-shadow:0 1px 4px rgba(0,0,0,0.8)}
+.pv-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.8);font-size:22px;padding:4px}
+.pv-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pv-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.pv-footer{flex-shrink:0;background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);padding:16px 16px 24px;position:absolute;bottom:0;left:0;right:0}
+.pv-actions{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.pv-action-btn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.8);font-size:24px;padding:4px 8px;transition:transform 0.15s,color 0.15s}
+.pv-action-btn:active{transform:scale(0.88)}
+.pv-action-btn.liked{color:var(--danger)}
+.pv-like-count{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,0.7);margin-right:8px}
+.pv-comment-btn-full{margin-left:auto;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-family:Impact,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;cursor:pointer;transition:background 0.2s}
+.pv-comment-btn-full:hover{background:rgba(255,255,255,0.2)}
+.pv-caption{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.4;margin-bottom:4px}
+.pv-caption strong{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:white;margin-right:6px}
+.pv-time{font-size:10px;color:rgba(255,255,255,0.4);font-family:'Barlow Condensed',sans-serif;letter-spacing:1px}
+
+/* ── INBOX ── */
+#inbox-modal{position:fixed;inset:0;z-index:4000;background:var(--bg-base);display:flex;flex-direction:column;max-width:640px;margin:0 auto;animation:fadeIn 0.2s ease}
+#inbox-modal.hidden{display:none}
+.inbox-item{display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border-subtle);cursor:default;transition:background 0.15s;position:relative}
+.inbox-item.unread{background:rgba(91,140,255,0.04)}
+.inbox-item.unread::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.inbox-item.type-warning.unread::before{background:var(--warning)}
+.inbox-item.type-warning .inbox-icon{color:var(--warning)}
+.inbox-item.type-approved.unread::before{background:var(--success)}
+.inbox-item.type-approved .inbox-icon{color:var(--success)}
+.inbox-item.type-rejected.unread::before{background:var(--danger)}
+.inbox-item.type-rejected .inbox-icon{color:var(--danger)}
+.inbox-item.type-deleted.unread::before{background:var(--danger)}
+.inbox-item.type-deleted .inbox-icon{color:var(--danger)}
+.inbox-item.type-uploaded.unread::before{background:var(--accent)}
+.inbox-item.type-uploaded .inbox-icon{color:var(--accent)}
+.inbox-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.inbox-body{flex:1}
+.inbox-title{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:var(--text-white);letter-spacing:0.5px}
+.inbox-msg{font-size:12px;color:var(--text-secondary);margin-top:3px;line-height:1.4}
+.inbox-time{font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.5px}
+.inbox-badge{position:absolute;top:-4px;right:-4px;background:var(--danger);color:white;font-size:10px;min-width:17px;height:17px;border-radius:0;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;padding:0 3px;pointer-events:none}
+.nav-icon-wrap{position:relative;display:inline-flex}
+
+/* ── ADMIN MULTI-ACTION ── */
+.admin-card-actions-log{padding:6px 12px 0;display:flex;flex-wrap:wrap;gap:5px;min-height:0}
+.action-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;padding:3px 8px;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px}
+.action-tag.approve{background:rgba(68,204,136,0.15);color:var(--success);border:1px solid var(--success)}
+.action-tag.reject{background:var(--danger-glow);color:var(--danger);border:1px solid var(--danger)}
+.action-tag.warn{background:rgba(255,170,51,0.12);color:var(--warning);border:1px solid var(--warning)}
+.action-tag.ban{background:var(--admin-glow);color:var(--admin);border:1px solid var(--admin)}
+.adm-btn.finalize{background:var(--border-mid);color:var(--text-white);border:1px solid var(--border-active)}
+.adm-btn.finalize.has-action{background:var(--accent);color:white;border:none}
 </style>
 </head>
 <body>
@@ -345,7 +400,10 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
     <button class="nav-btn active" onclick="switchView('feed',this)"><span class="nav-icon">&#x229E;</span><span>FEED</span></button>
     <button class="nav-btn" onclick="switchView('explore',this)"><span class="nav-icon">&#x25CE;</span><span>EXPLORE</span></button>
     <button class="nav-btn upload-btn" onclick="openUploadModal()"><span class="nav-icon">+</span><span>POST</span></button>
-    <button class="nav-btn" onclick="openStoryAdd()"><span class="nav-icon">&#x25C8;</span><span>STORY</span></button>
+    <button class="nav-btn" onclick="openInbox()">
+      <span class="nav-icon-wrap">&#x2709;<span class="inbox-badge hidden" id="inbox-nav-badge">0</span></span>
+      <span>INBOX</span>
+    </button>
     <button class="nav-btn" onclick="switchView('profile',this)"><span class="nav-icon">&#x25C9;</span><span>PROFIL</span></button>
     <button class="nav-btn" onclick="openAdminPanel()" style="color:var(--admin)"><span class="nav-icon">&#x1F441;</span><span>ADMIN</span></button>
   </nav>
@@ -418,6 +476,44 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
   <div class="scan-bar-wrap"><div class="scan-bar-fill"></div></div>
 </div>
 
+<!-- PHOTO VIEWER -->
+<div id="photo-viewer" class="hidden">
+  <div class="pv-header">
+    <div class="pv-avatar" id="pv-avatar">?</div>
+    <div>
+      <div class="pv-username" id="pv-username">-</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px" id="pv-grade"></div>
+    </div>
+    <button class="pv-close" onclick="closePhotoViewer()">&#x2715;</button>
+  </div>
+  <div class="pv-img-wrap"><img id="pv-img" src="" alt="" /></div>
+  <div class="pv-footer">
+    <div class="pv-actions">
+      <button class="pv-action-btn" id="pv-like-btn" onclick="pvToggleLike()">&#x2661;</button>
+      <span class="pv-like-count" id="pv-like-count">0</span>
+      <button class="pv-action-btn" onclick="pvOpenComments()">&#x1F4AC;</button>
+      <span class="pv-like-count" id="pv-comment-count">0</span>
+      <button class="pv-comment-btn-full" onclick="pvOpenComments()">KOMMENTARE &#x2192;</button>
+    </div>
+    <div class="pv-caption" id="pv-caption"></div>
+    <div class="pv-time" id="pv-time"></div>
+  </div>
+</div>
+
+<!-- INBOX -->
+<div id="inbox-modal" class="hidden">
+  <div class="modal-header">
+    <span class="modal-title">INBOX</span>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button onclick="markAllInboxRead()" style="background:none;border:1px solid var(--border-mid);color:var(--text-secondary);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;cursor:pointer">ALLE GELESEN</button>
+      <button class="modal-close" onclick="closeInbox()">&#x2715;</button>
+    </div>
+  </div>
+  <div class="modal-body" id="inbox-list">
+    <div class="loading-pulse"><div class="pulse-dot"></div><div class="pulse-dot"></div><div class="pulse-dot"></div></div>
+  </div>
+</div>
+
 <!-- ADMIN PANEL -->
 <div id="admin-panel" class="hidden">
   <div id="admin-pw-screen" class="admin-pw-screen">
@@ -452,8 +548,9 @@ body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;b
 <script>
 const SUPABASE_URL='https://sigjwzivusuzmhvixtbm.supabase.co';
 const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpZ2p3eml2dXN1em1odml4dGJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTI3MDksImV4cCI6MjA4ODcyODcwOX0.j0yB-NYM5HOkfKVBz24rWMBQNF8w-uEFjX55UGeD30E';
-// ⚠ ANTHROPIC KEY EINTRAGEN (platform.anthropic.com):
-const ANTHROPIC_KEY='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';
+// ⚠ API Key wurde aus Sicherheitsgründen entfernt.
+// Der Check läuft jetzt über eine Supabase Edge Function (check-image).
+// Anleitung: siehe DSN_REFERENZ oder README
 const ADMIN_PASSWORD='LoeweTiger123?!';
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
@@ -578,31 +675,23 @@ function resizeImage(file,maxDim,quality){
 
 // CLAUDE VISION CHECK
 async function checkImageWithClaude(base64data){
-  if(!ANTHROPIC_KEY||ANTHROPIC_KEY==='DEIN_API_KEY_HIER'){return{safe:true,skip:true}}
   const base64=base64data.split(',')[1];
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
+    const res=await fetch(SUPABASE_URL+'/functions/v1/check-image',{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
-        'x-api-key':ANTHROPIC_KEY,
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access':'true'
+        'Authorization':'Bearer '+SUPABASE_KEY
       },
-      body:JSON.stringify({
-        model:'claude-haiku-4-5-20251001',max_tokens:150,
-        messages:[{role:'user',content:[
-          {type:'image',source:{type:'base64',media_type:'image/jpeg',data:base64}},
-          {type:'text',text:'Du bist ein strikter Content-Filter fuer eine Schul-App (Schueler 10-18 Jahre). Antworte NUR mit JSON, kein Markdown, keine Erklaerung: {"safe":true} oder {"safe":false,"reason":"kurze deutsche Begruendung"}. Markiere als safe:false wenn das Bild zeigt: Nacktheit oder Haut die Intimbereiche zeigt, sexuelle Inhalte oder Posen, Gewalt, Blut, Waffen in gewaltsamem Kontext, Extremismus oder Hassymbole, Drogen oder Alkohol prominent. Bei normalen Fotos (Gesichter, Sport, Essen, Natur, Schule, Tiere) antworte {"safe":true}.'}
-        ]}]
-      })
+      body:JSON.stringify({image_base64:base64})
     });
-    const data=await res.json();
-    if(data.error){console.error('Claude API Error:',data.error);return{safe:false,reason:'API Fehler: '+data.error.message}}
-    const text=(data.content&&data.content[0]&&data.content[0].text)||'{"safe":true}';
-    const clean=text.replace(/```json|```/g,'').trim();
-    return JSON.parse(clean);
-  }catch(e){console.error('Vision check failed:',e);return{safe:false,reason:'Verbindungsfehler — wird manuell geprueft'}}
+    if(!res.ok){console.error('Edge Function HTTP',res.status);return{safe:false,reason:'Serverfehler ('+res.status+')'}}
+    const result=await res.json();
+    return result;
+  }catch(e){
+    console.error('check-image Fehler:',e);
+    return{safe:false,reason:'Verbindungsfehler — wird manuell geprueft'};
+  }
 }
 
 // FILTERS
@@ -660,12 +749,14 @@ async function submitPost(){
     try{
       await db.from('dsn_photos').insert({user_id:currentUser.id,username:currentUser.username,real_name:currentUser.real_name,grade:currentUser.grade,image_data:uploadImageData,caption:caption,filter_name:selectedFilter});
       logActivity('post',currentUser.username,'hat ein Foto gepostet',caption.slice(0,60)||'');
+      sendInbox(currentUser.id,'uploaded','Post hochgeladen ✓','Dein Foto wurde erfolgreich gepostet und ist jetzt im Feed sichtbar.');
       showToast('POST VEROEFFENTLICHT','success');closeUploadModal();loadFeed(true);
     }catch(e){showToast('FEHLER: '+e.message,'error');btn.disabled=false;btn.textContent='POSTEN'}
   }else{
     try{
       await db.from('dsn_photos_pending').insert({user_id:currentUser.id,username:currentUser.username,real_name:currentUser.real_name,grade:currentUser.grade,image_data:uploadImageData,caption:caption,filter_name:selectedFilter,ai_reason:check.reason||'Unbekannt',type:'post'});
       logActivity('flag',currentUser.username,'Post geflaggt',check.reason||'');
+      sendInbox(currentUser.id,'pending','Post wird geprueft','Dein Foto wurde von der KI markiert und wird von einem Admin geprueft. Du wirst benachrichtigt.');
       showToast('BILD WIRD UEBERPRUEFT','warning');closeUploadModal();
     }catch(e){showToast('FEHLER','error');btn.disabled=false;btn.textContent='POSTEN'}
   }
@@ -818,20 +909,6 @@ async function submitStory(){
   }
 }
 
-// PROFILE
-async function loadProfile(){
-  const u=currentUser;
-  document.getElementById('profile-avatar-big').textContent=(u.real_name||u.username||'?').slice(0,2).toUpperCase();
-  document.getElementById('profile-username-display').textContent=u.username;
-  document.getElementById('profile-realname-display').textContent=u.real_name;
-  document.getElementById('profile-grade-display').textContent='KLASSE '+u.grade;
-  const{data}=await db.from('dsn_photos').select('id,image_data,filter_name,likes_count,comments_count').eq('user_id',u.id).order('created_at',{ascending:false});
-  const posts=data||[];const totalLikes=posts.reduce(function(s,p){return s+(p.likes_count||0)},0);
-  document.getElementById('profile-posts-count').textContent=posts.length;
-  document.getElementById('profile-likes-count').textContent=totalLikes;
-  document.getElementById('profile-grid').innerHTML=posts.map(function(p){const f=(FILTERS.find(function(x){return x.name===p.filter_name})||{css:''}).css;return'<div class="grid-photo" onclick="openComments(\''+p.id+'\')"><img src="'+p.image_data+'" style="filter:'+f+'" loading="lazy" /><div class="grid-overlay">&#x2665; '+(p.likes_count||0)+' &nbsp; &#x1F4AC; '+(p.comments_count||0)+'</div></div>'}).join('')||'<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--text-muted);font-family:\'Barlow Condensed\',sans-serif">NOCH KEINE POSTS</div>';
-}
-
 // EXPLORE
 let allExplorePosts=[];
 async function loadExplore(){
@@ -858,24 +935,31 @@ function openPostSheet(id){
 }
 function closeSheet(){document.getElementById('sheet-overlay').classList.add('hidden');document.getElementById('post-sheet').classList.add('hidden');sheetPostId=null}
 async function deleteCurrentPost(){
-  if(!sheetPostId)return;closeSheet();
+  if(!sheetPostId)return;
+  const postId=sheetPostId; // ID sichern bevor closeSheet() sie nullt
+  closeSheet();
   try{
-    await db.from('dsn_photo_comments').delete().eq('photo_id',sheetPostId);
-    await db.from('dsn_photo_likes').delete().eq('photo_id',sheetPostId);
-    await db.from('dsn_photos').delete().eq('id',sheetPostId).eq('user_id',currentUser.id);
+    const{error:e1}=await db.from('dsn_photo_comments').delete().eq('photo_id',postId);
+    const{error:e2}=await db.from('dsn_photo_likes').delete().eq('photo_id',postId);
+    const{error:e3}=await db.from('dsn_photos').delete().eq('id',postId).eq('user_id',currentUser.id);
+    if(e3)throw e3;
     logActivity('post',currentUser.username,'eigenen Post geloescht');
+    sendInbox(currentUser.id,'deleted','Post geloescht','Dein Foto wurde erfolgreich geloescht.');
     showToast('POST GELOESCHT','success');loadFeed(true);
-  }catch(e){showToast('FEHLER','error')}
+  }catch(e){console.error('deletePost:',e);showToast('FEHLER: '+e.message,'error')}
 }
 async function adminDeleteCurrentPost(){
-  if(!sheetPostId||!adminLoggedIn)return;closeSheet();
+  if(!sheetPostId||!adminLoggedIn)return;
+  const postId=sheetPostId; // ID sichern bevor closeSheet() sie nullt
+  closeSheet();
   try{
-    await db.from('dsn_photo_comments').delete().eq('photo_id',sheetPostId);
-    await db.from('dsn_photo_likes').delete().eq('photo_id',sheetPostId);
-    await db.from('dsn_photos').delete().eq('id',sheetPostId);
-    logActivity('flag',currentUser.username,'ADMIN hat Post geloescht',sheetPostId);
+    const{error:e1}=await db.from('dsn_photo_comments').delete().eq('photo_id',postId);
+    const{error:e2}=await db.from('dsn_photo_likes').delete().eq('photo_id',postId);
+    const{error:e3}=await db.from('dsn_photos').delete().eq('id',postId);
+    if(e3)throw e3;
+    logActivity('flag',currentUser.username,'ADMIN hat Post geloescht',postId);
     showToast('POST ENTFERNT (ADMIN)','success');loadFeed(true);
-  }catch(e){showToast('FEHLER','error')}
+  }catch(e){console.error('adminDeletePost:',e);showToast('FEHLER: '+e.message,'error')}
 }
 
 // ADMIN PANEL
@@ -934,50 +1018,88 @@ async function renderAdminQueue(c){
       return'<div class="admin-card" id="pend-'+item.id+'">'
         +'<img class="admin-card-img" src="'+item.image_data+'" />'
         +'<div class="admin-card-info">'
-        +'<div class="admin-card-user">'+item.username+' <span style="color:var(--text-secondary);font-family:\'Barlow Condensed\',sans-serif;font-size:11px">'+( item.type==='story'?'STORY':'POST')+'</span></div>'
+        +'<div class="admin-card-user">'+item.username+' <span style="color:var(--text-secondary);font-family:\'Barlow Condensed\',sans-serif;font-size:11px;letter-spacing:1px">'+(item.type==='story'?'· STORY':'· POST')+'</span></div>'
         +'<div class="admin-card-meta">Klasse '+item.grade+' &middot; '+timeAgo(item.created_at)+'</div>'
-        +(item.caption?'<div class="admin-card-meta" style="margin-top:4px">'+escHtml(item.caption)+'</div>':'')
+        +(item.caption?'<div class="admin-card-meta" style="margin-top:4px;font-style:italic">\"'+escHtml(item.caption)+'\"</div>':'')
         +'</div>'
-        +'<div class="admin-card-reason">&#x26A0; KI: '+escHtml(item.ai_reason)+'</div>'
-        +'<div class="admin-actions">'
-        +'<button class="adm-btn approve" onclick="adminApprove(\''+item.id+'\',\''+item.type+'\')">&#x2713; FREIGEBEN</button>'
-        +'<button class="adm-btn reject" onclick="adminReject(\''+item.id+'\',\''+item.username+'\')">&#x2715; ABLEHNEN</button>'
+        +'<div class="admin-card-reason">&#x26A0; KI-Grund: '+escHtml(item.ai_reason)+'</div>'
+        +'<div class="admin-card-actions-log" id="action-log-'+item.id+'"></div>'
+        +'<div class="admin-actions" style="margin-top:8px">'
+        +'<button class="adm-btn approve" onclick="queueApprove(\''+item.id+'\',\''+item.type+'\',\''+item.user_id+'\')">&#x2713; FREIGEBEN</button>'
+        +'<button class="adm-btn reject" onclick="queueReject(\''+item.id+'\',\''+item.username+'\',\''+item.user_id+'\')">&#x2715; ABLEHNEN</button>'
         +'</div>'
         +'<div class="admin-actions" style="padding-top:0">'
         +'<button class="adm-btn warn" style="flex:1" onclick="toggleWarnInput(\''+item.id+'\')">&#x26A0; ERMAHNEN</button>'
-        +'<button class="adm-btn ban" style="flex:1" onclick="adminBanUser(\''+item.user_id+'\',\''+item.username+'\')">&#x1F6AB; SPERREN</button>'
+        +'<button class="adm-btn ban" style="flex:1" onclick="queueBan(\''+item.user_id+'\',\''+item.username+'\',\''+item.id+'\')">&#x1F6AB; SPERREN</button>'
         +'</div>'
         +'<div class="warn-input-area hidden" id="warn-area-'+item.id+'">'
-        +'<textarea id="warn-text-'+item.id+'" placeholder="Nachricht an den User..." rows="3"></textarea>'
+        +'<textarea id="warn-text-'+item.id+'" placeholder="Nachricht an den User..."></textarea>'
         +'<button class="adm-btn warn" style="width:100%;margin-top:8px" onclick="sendWarning(\''+item.user_id+'\',\''+item.username+'\',\''+item.id+'\')">WARNUNG SENDEN</button>'
+        +'</div>'
+        +'<div style="padding:8px 12px 12px">'
+        +'<button class="adm-btn finalize" id="finalize-'+item.id+'" style="width:100%" onclick="finalizeQueueItem(\''+item.id+'\')">ABSCHLIESSEN</button>'
         +'</div>'
         +'</div>';
     }).join('');
   }catch(e){c.innerHTML='<div style="padding:16px;color:var(--danger)">'+e.message+'</div>'}
 }
 function toggleWarnInput(itemId){const a=document.getElementById('warn-area-'+itemId);a.classList.toggle('hidden');if(!a.classList.contains('hidden'))document.getElementById('warn-text-'+itemId).focus()}
-async function adminApprove(pendingId,type){
+const queueActions={};
+function addActionTag(itemId,type,label){
+  const log=document.getElementById('action-log-'+itemId);if(!log)return;
+  const existing=log.querySelector('.action-tag.'+type);if(existing)existing.remove();
+  const tag=document.createElement('span');tag.className='action-tag '+type;tag.innerHTML=label;log.appendChild(tag);
+  const fin=document.getElementById('finalize-'+itemId);
+  if(fin){fin.classList.add('has-action');fin.textContent='ABSCHLIESSEN ✓'}
+  if(!queueActions[itemId])queueActions[itemId]=[];queueActions[itemId].push(type);
+}
+async function queueApprove(pendingId,type,userId){
   try{
     const{data:pending}=await db.from('dsn_photos_pending').select('*').eq('id',pendingId).single();if(!pending)return;
     if(type==='post'){await db.from('dsn_photos').insert({user_id:pending.user_id,username:pending.username,real_name:pending.real_name,grade:pending.grade,image_data:pending.image_data,caption:pending.caption,filter_name:pending.filter_name})}
     else{await db.from('dsn_stories').insert({user_id:pending.user_id,username:pending.username,real_name:pending.real_name,image_data:pending.image_data})}
-    await db.from('dsn_photos_pending').delete().eq('id',pendingId);
+    sendInbox(userId,'approved','Post freigegeben ✓','Dein Foto wurde von einem Admin geprueft und ist jetzt im Feed sichtbar.');
     logActivity('flag',currentUser.username,'Post von '+pending.username+' FREIGEGEBEN');
-    showToast('FREIGEGEBEN','success');document.getElementById('pend-'+pendingId)&&document.getElementById('pend-'+pendingId).remove();updateQueueBadge();
+    addActionTag(pendingId,'approve','&#x2713; Freigegeben');
+    showToast('FREIGEGEBEN — Abschliessen nicht vergessen!','success');
+  }catch(e){showToast('FEHLER: '+e.message,'error')}
+}
+async function queueReject(pendingId,username,userId){
+  sendInbox(userId,'rejected','Post abgelehnt','Dein Foto wurde von einem Admin abgelehnt. Bei Fragen wende dich an einen Admin.');
+  logActivity('flag',currentUser.username,'Post von '+username+' ABGELEHNT');
+  addActionTag(pendingId,'reject','&#x2715; Abgelehnt');
+  showToast('ABGELEHNT — Abschliessen nicht vergessen!','error');
+}
+async function queueBan(userId,username,itemId){
+  const reason=window.prompt('Grund fuer Sperre von @'+username+':');if(!reason)return;
+  try{
+    await db.from('dsn_user_bans').insert({user_id:userId,username:username,reason:reason});
+    sendInbox(userId,'warning','Account gesperrt','Dein Account wurde gesperrt. Grund: '+reason);
+    logActivity('ban',currentUser.username,'User '+username+' GESPERRT via Queue',reason);
+    addActionTag(itemId,'ban','&#x1F6AB; Gesperrt');
+    showToast('@'+username+' gesperrt','error');
   }catch(e){showToast('FEHLER','error')}
 }
-async function adminReject(pendingId,username){
+async function finalizeQueueItem(pendingId){
   try{
     await db.from('dsn_photos_pending').delete().eq('id',pendingId);
-    logActivity('flag',currentUser.username,'Post von '+username+' ABGELEHNT');
-    showToast('ABGELEHNT','error');document.getElementById('pend-'+pendingId)&&document.getElementById('pend-'+pendingId).remove();updateQueueBadge();
+    document.getElementById('pend-'+pendingId)&&document.getElementById('pend-'+pendingId).remove();
+    delete queueActions[pendingId];updateQueueBadge();
+    showToast('ABGESCHLOSSEN','success');
   }catch(e){showToast('FEHLER','error')}
 }
 async function sendWarning(userId,username,itemId){
   const msg=document.getElementById('warn-text-'+itemId)&&document.getElementById('warn-text-'+itemId).value&&document.getElementById('warn-text-'+itemId).value.trim();
   if(!msg){showToast('NACHRICHT EINGEBEN','error');return}
-  try{await db.from('dsn_user_warnings').insert({user_id:userId,username:username,message:msg,seen:false});logActivity('ban',currentUser.username,'User '+username+' verwarnt',msg);showToast('VERWARNUNG GESENDET','success');document.getElementById('warn-area-'+itemId)&&document.getElementById('warn-area-'+itemId).classList.add('hidden')}
-  catch(e){showToast('FEHLER','error')}
+  try{
+    await db.from('dsn_user_warnings').insert({user_id:userId,username:username,message:msg,seen:false});
+    sendInbox(userId,'warning','Verwarnung von Admin',msg);
+    logActivity('ban',currentUser.username,'User '+username+' verwarnt',msg);
+    showToast('VERWARNUNG GESENDET','success');
+    document.getElementById('warn-area-'+itemId)&&document.getElementById('warn-area-'+itemId).classList.add('hidden');
+    // mark action on card
+    addActionTag(itemId,'warn','&#x26A0; Verwarnt');
+  }catch(e){showToast('FEHLER','error')}
 }
 async function adminBanUser(userId,username){
   const reason=window.prompt('Grund fuer Sperre von @'+username+':');if(!reason)return;
@@ -1069,13 +1191,189 @@ async function renderAdminStats(c){
   }catch(e){c.innerHTML='<div style="padding:16px;color:var(--danger)">'+e.message+'</div>'}
 }
 
-// INIT
+// ══════════════════════════════════════════════
+//  PHOTO VIEWER
+// ══════════════════════════════════════════════
+let pvPostId=null;
+let pvProfilePosts=[];
+
+function openPhotoViewer(postId){
+  // find post in feedPosts or profilePosts
+  const p=feedPosts.find(function(x){return x.id===postId})||pvProfilePosts.find(function(x){return x.id===postId});
+  if(!p)return;
+  pvPostId=postId;
+  const init=(p.real_name||p.username||'?').slice(0,2).toUpperCase();
+  const fcss=(FILTERS.find(function(f){return f.name===p.filter_name})||{css:''}).css;
+  const liked=userLikes.has(postId);
+  document.getElementById('pv-avatar').textContent=init;
+  document.getElementById('pv-username').textContent=p.username;
+  document.getElementById('pv-grade').textContent='KLASSE '+p.grade;
+  document.getElementById('pv-img').src=p.image_data;
+  document.getElementById('pv-img').style.filter=fcss;
+  document.getElementById('pv-like-count').textContent=p.likes_count||0;
+  document.getElementById('pv-comment-count').textContent=p.comments_count||0;
+  const likeBtn=document.getElementById('pv-like-btn');
+  likeBtn.innerHTML=liked?'&#x2665;':'&#x2661;';
+  likeBtn.className='pv-action-btn'+(liked?' liked':'');
+  const capEl=document.getElementById('pv-caption');
+  capEl.innerHTML=p.caption?'<strong>'+p.username+'</strong>'+escHtml(p.caption):'';
+  document.getElementById('pv-time').textContent=timeAgo(p.created_at);
+  document.getElementById('photo-viewer').classList.remove('hidden');
+}
+
+function closePhotoViewer(){
+  document.getElementById('photo-viewer').classList.add('hidden');
+  pvPostId=null;
+}
+
+async function pvToggleLike(){
+  if(!pvPostId)return;
+  await toggleLike(pvPostId);
+  // sync viewer like button
+  const liked=userLikes.has(pvPostId);
+  const likeBtn=document.getElementById('pv-like-btn');
+  likeBtn.innerHTML=liked?'&#x2665;':'&#x2661;';
+  likeBtn.className='pv-action-btn'+(liked?' liked':'');
+  const countEl=document.getElementById('like-count-'+pvPostId);
+  document.getElementById('pv-like-count').textContent=countEl?countEl.textContent:'';
+}
+
+function pvOpenComments(){
+  if(!pvPostId)return;
+  closePhotoViewer();
+  openComments(pvPostId);
+}
+
+// override loadProfile to also store posts for viewer
+const _origLoadProfile=loadProfile;
+async function loadProfile(){
+  const u=currentUser;
+  document.getElementById('profile-avatar-big').textContent=(u.real_name||u.username||'?').slice(0,2).toUpperCase();
+  document.getElementById('profile-username-display').textContent=u.username;
+  document.getElementById('profile-realname-display').textContent=u.real_name;
+  document.getElementById('profile-grade-display').textContent='KLASSE '+u.grade;
+  const{data}=await db.from('dsn_photos').select('*').eq('user_id',u.id).order('created_at',{ascending:false});
+  pvProfilePosts=data||[];
+  const totalLikes=pvProfilePosts.reduce(function(s,p){return s+(p.likes_count||0)},0);
+  document.getElementById('profile-posts-count').textContent=pvProfilePosts.length;
+  document.getElementById('profile-likes-count').textContent=totalLikes;
+  document.getElementById('profile-grid').innerHTML=pvProfilePosts.map(function(p){
+    const f=(FILTERS.find(function(x){return x.name===p.filter_name})||{css:''}).css;
+    return'<div class="grid-photo" onclick="openPhotoViewer(\''+p.id+'\')"><img src="'+p.image_data+'" style="filter:'+f+'" loading="lazy" /><div class="grid-overlay">&#x2665; '+(p.likes_count||0)+' &nbsp; &#x1F4AC; '+(p.comments_count||0)+'</div></div>';
+  }).join('')||'<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--text-muted);font-family:\'Barlow Condensed\',sans-serif">NOCH KEINE POSTS</div>';
+}
+
+// ══════════════════════════════════════════════
+//  INBOX
+// ══════════════════════════════════════════════
+const INBOX_ICONS={
+  uploaded:'&#x1F4E4;',
+  approved:'&#x2705;',
+  rejected:'&#x274C;',
+  deleted:'&#x1F5D1;',
+  warning:'&#x26A0;',
+  pending:'&#x23F3;',
+  info:'&#x1F4AC;'
+};
+const INBOX_TITLES_FALLBACK={
+  uploaded:'Post hochgeladen',
+  approved:'Post freigegeben',
+  rejected:'Post abgelehnt',
+  deleted:'Post gelöscht',
+  warning:'Admin-Nachricht',
+  pending:'Post in Prüfung',
+  info:'Info'
+};
+
+async function sendInbox(userId,type,title,message){
+  try{
+    await db.from('dsn_inbox').insert({
+      user_id:userId,
+      type:type,
+      title:title,
+      message:message,
+      seen:false
+    });
+  }catch(e){console.warn('sendInbox failed:',e.message)}
+}
+
+async function openInbox(){
+  document.getElementById('inbox-modal').classList.remove('hidden');
+  const list=document.getElementById('inbox-list');
+  list.innerHTML='<div class="loading-pulse"><div class="pulse-dot"></div><div class="pulse-dot"></div><div class="pulse-dot"></div></div>';
+  try{
+    const{data}=await db.from('dsn_inbox').select('*').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(50);
+    const items=data||[];
+    if(!items.length){
+      list.innerHTML='<div class="empty-state"><div class="empty-icon">&#x2709;</div><div class="empty-title">INBOX LEER</div><div class="empty-sub">Hier erscheinen Nachrichten vom Admin und Benachrichtigungen.</div></div>';
+      return;
+    }
+    list.innerHTML=items.map(function(m){
+      const icon=INBOX_ICONS[m.type]||INBOX_ICONS.info;
+      return'<div class="inbox-item type-'+(m.type||'info')+' '+(m.seen?'':'unread')+'" id="inbox-'+m.id+'">'
+        +'<div class="inbox-icon">'+icon+'</div>'
+        +'<div class="inbox-body">'
+        +'<div class="inbox-title">'+escHtml(m.title||INBOX_TITLES_FALLBACK[m.type]||'Nachricht')+'</div>'
+        +'<div class="inbox-msg">'+escHtml(m.message||'')+'</div>'
+        +'<div class="inbox-time">'+timeAgo(m.created_at)+'</div>'
+        +'</div></div>';
+    }).join('');
+    // mark all as seen after opening
+    await db.from('dsn_inbox').update({seen:true}).eq('user_id',currentUser.id).eq('seen',false);
+    updateInboxBadge();
+  }catch(e){
+    list.innerHTML='<div style="padding:24px;color:var(--danger);font-family:\'Barlow Condensed\',sans-serif">FEHLER: '+e.message+'</div>';
+  }
+}
+
+function closeInbox(){
+  document.getElementById('inbox-modal').classList.add('hidden');
+}
+
+async function markAllInboxRead(){
+  try{
+    await db.from('dsn_inbox').update({seen:true}).eq('user_id',currentUser.id);
+    document.querySelectorAll('.inbox-item.unread').forEach(function(el){el.classList.remove('unread')});
+    updateInboxBadge();
+    showToast('ALLE GELESEN','success');
+  }catch(e){}
+}
+
+async function updateInboxBadge(){
+  try{
+    const{count}=await db.from('dsn_inbox').select('id',{count:'exact',head:true}).eq('user_id',currentUser.id).eq('seen',false);
+    const badge=document.getElementById('inbox-nav-badge');
+    if(count&&count>0){badge.textContent=count>9?'9+':count;badge.classList.remove('hidden')}
+    else{badge.classList.add('hidden')}
+  }catch(e){}
+}
+
+// ══════════════════════════════════════════════
+//  INIT
 (function init(){
   currentUser=getSession();
   if(!currentUser){document.getElementById('login-wall').classList.remove('hidden');return}
   document.getElementById('login-wall').classList.add('hidden');
-  setupLogoTap();loadFeed();checkForWarnings();
+  setupLogoTap();loadFeed();checkForWarnings();updateInboxBadge();
+  // refresh inbox badge every 60s
+  setInterval(updateInboxBadge,60000);
 })();
 </script>
 </body>
 </html>
+<!--
+SQL fuer dsn_inbox (einmalig in Supabase ausfuehren):
+
+CREATE TABLE IF NOT EXISTS dsn_inbox (
+  id         UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id    UUID NOT NULL,
+  type       TEXT NOT NULL DEFAULT 'info',
+  title      TEXT NOT NULL,
+  message    TEXT NOT NULL,
+  seen       BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE dsn_inbox ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "open" ON dsn_inbox;
+CREATE POLICY "open" ON dsn_inbox FOR ALL USING (true) WITH CHECK (true);
+-->
